@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign In · Enterprise Fraud Risk Management System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="brand">
+      <i class="bi bi-shield-lock-fill"></i>
+      <span>Enterprise Fraud Risk System</span>
+    </div>
+    <h5 class="mb-3">Sign in to your account</h5>
+
+    <form id="loginForm" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="username">Username</label>
+        <input type="text" class="form-control" id="username" required autocomplete="username">
+        <div class="form-error" id="usernameError"></div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" class="form-control" id="password" required autocomplete="current-password">
+        <div class="form-error" id="passwordError"></div>
+      </div>
+      <div class="form-error mb-2" id="formError"></div>
+      <button type="submit" class="btn btn-efrs-primary w-100" id="loginBtn">
+        <span id="loginBtnText">Sign In</span>
+        <span id="loginSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+      </button>
+    </form>
+
+    <div class="auth-footer-link">
+      Don't have an account? <a href="register.html">Register</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
