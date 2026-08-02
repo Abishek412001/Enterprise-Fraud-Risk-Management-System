@@ -7,6 +7,44 @@
 
 An enterprise-grade, multi-tenant Fraud Risk Management (FRM), Account Takeover (ATO) Monitoring, and Microsoft Sentinel-inspired SIEM Alert Management Platform designed for Tier-1 banks, payment processors, and fintech platforms.
 
+
+## 🌐 Live Demo
+
+Experience the Enterprise Fraud Risk Management System through the live interactive demonstration.
+
+### 🚀 Live Application
+
+**Streamlit Demo:**  
+https://enterprise-fraud-risk-management-system-5mop3gaiuy8kyw3xaqgpzf.streamlit.app/
+
+### What You Can Explore
+
+- 🔐 Secure Login & Authentication
+- 📊 Executive Fraud Dashboard
+- 👥 Customer Management
+- 💳 Account & Card Management
+- 💰 Transaction Monitoring
+- 🚨 Fraud Alert Management
+- 🛡️ Account Takeover (ATO) Investigation
+- 📈 Risk Scoring & Fraud Analytics
+- 📑 Investigation Case Management
+- 📋 Reports & Business Intelligence
+- 📉 Fraud Trend Analysis
+- 🔍 Search, Filter & Drill-down Capabilities
+
+### Demo Highlights
+
+The live application demonstrates a realistic enterprise fraud operations workflow inspired by modern banking environments, including:
+
+- Fraud alert generation and monitoring
+- Risk score calculation
+- Investigation lifecycle management
+- Executive KPI dashboards
+- Interactive reporting
+- Banking transaction analytics
+- SQL-driven fraud detection
+- Responsive enterprise UI
+
 ---
 
 ## 🌟 Architectural Overview
