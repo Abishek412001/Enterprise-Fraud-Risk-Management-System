@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Analyst Action Center Dashboard · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="investigation.html"><i class="bi bi-search"></i> Investigation Workspace</a>
+  <a class="nav-link" href="customer360.html"><i class="bi bi-person-bounding-box"></i> Customer 360</a>
+  <a class="nav-link active" href="analystworkspace.html"><i class="bi bi-person-workspace"></i> Analyst Action Center</a>
+  <a class="nav-link" href="wca.html"><i class="bi bi-clipboard-check-fill"></i> WCA Audit Log</a>
+  <a class="nav-link" href="partnercommunications.html"><i class="bi bi-chat-left-dots-fill"></i> Partner Comms</a>
+  <a class="nav-link" href="cases.html"><i class="bi bi-briefcase-fill"></i> Cases</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="sentinelalerts.html"><i class="bi bi-cpu"></i> Sentinel SIEM</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Analyst Workload & Active Queue Dashboard</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Under Investigation</div>
+          <div class="stat-value text-danger" id="kpiUnderInv">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(214,69,69,.12); color:#d64545;"><i class="bi bi-search"></i></div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Accounts Frozen</div>
+          <div class="stat-value text-warning" id="kpiFrozen">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(230,162,60,.15); color:#e6a23c;"><i class="bi bi-snow"></i></div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Cards Suspended</div>
+          <div class="stat-value" id="kpiCardsSusp">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(28,63,170,.12); color:#1c3faa;"><i class="bi bi-credit-card-2-front-fill"></i></div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Devices Blocked</div>
+          <div class="stat-value text-success" id="kpiDevBlocked">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(22,163,122,.12); color:#16a37a;"><i class="bi bi-laptop-fill"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="efrs-panel">
+    <h6 class="mb-3 border-bottom pb-2">Active Analyst Investigation Queue</h6>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Session ID</th>
+            <th>Customer</th>
+            <th>Analyst</th>
+            <th>Start Time</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="queueTableBody">
+          <tr><td colspan="6" class="text-muted text-center py-4">Loading queue...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/analystworkspace.js"></script>
+</body>
+</html>

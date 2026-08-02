@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fraud Metrics & BI Analytics · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="executivedashboard.html"><i class="bi bi-pie-chart-fill"></i> Executive C-Suite</a>
+  <a class="nav-link active" href="metrics.html"><i class="bi bi-bar-chart-line-fill"></i> Fraud Metrics & BI</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-text-fill"></i> Export Engine</a>
+  <a class="nav-link" href="trendanalysis.html"><i class="bi bi-graph-up-arrow"></i> Trend Analytics</a>
+  <a class="nav-link" href="analystperformance.html"><i class="bi bi-award-fill"></i> Analyst Performance</a>
+  <a class="nav-link" href="users.html"><i class="bi bi-people-fill"></i> User RBAC</a>
+  <a class="nav-link" href="auditlogs.html"><i class="bi bi-journal-check"></i> Audit Logs</a>
+  <a class="nav-link" href="cases.html"><i class="bi bi-briefcase-fill"></i> Cases</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Fraud Metrics & BI Analytics Platform</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI-Style Insights Panel -->
+  <div class="efrs-panel mb-3 bg-light border-primary border-start border-4">
+    <h6 class="text-primary mb-2"><i class="bi bi-robot me-2"></i>Automated Fraud Telemetry & AI-Style Business Insights</h6>
+    <ul class="mb-0 small text-dark" id="insightsList">
+      <li>Loading telemetry insights...</li>
+    </ul>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3">Fraud Volume by Merchant</h6>
+        <canvas id="merchantChart" height="130"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3">Fraud Distribution by Country</h6>
+        <canvas id="countryChart" height="130"></canvas>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="js/metrics.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FRM Alerts Queue · Enterprise Fraud Risk Management System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link active" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="fraudalerts.html"><i class="bi bi-exclamation-triangle-fill"></i> Legacy Alerts</a>
+  <a class="nav-link" href="customers.html"><i class="bi bi-people-fill"></i> Customers</a>
+  <a class="nav-link" href="accounts.html"><i class="bi bi-wallet2"></i> Accounts</a>
+  <a class="nav-link" href="cards.html"><i class="bi bi-credit-card-2-front-fill"></i> Cards</a>
+  <a class="nav-link" href="merchants.html"><i class="bi bi-shop"></i> Merchants</a>
+  <a class="nav-link" href="transactions.html"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">FRM Alerts Management Queue</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary KPI Cards -->
+  <div class="row g-3 mb-3">
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Total Open Alerts</div>
+          <div class="stat-value" id="kpiOpenAlerts">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(28,63,170,.12); color:#1c3faa;"><i class="bi bi-shield-exclamation"></i></div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Critical Priority</div>
+          <div class="stat-value text-danger" id="kpiCriticalAlerts">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(214,69,69,.12); color:#d64545;"><i class="bi bi-exclamation-octagon-fill"></i></div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Assigned Alerts</div>
+          <div class="stat-value text-warning" id="kpiAssignedAlerts">--</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(230,162,60,.15); color:#e6a23c;"><i class="bi bi-person-check-fill"></i></div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="efrs-stat-card d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted small">Avg SLA / Age</div>
+          <div class="stat-value" id="kpiAvgAge">-- hrs</div>
+        </div>
+        <div class="stat-icon" style="background:rgba(22,163,122,.12); color:#16a37a;"><i class="bi bi-clock-history"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters & Search Toolbar -->
+  <div class="efrs-panel mb-3">
+    <div class="row g-2 align-items-center">
+      <div class="col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" id="searchInput" class="form-control" placeholder="Search Alert #, Customer, Account...">
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <select id="statusFilter" class="form-select form-select-sm">
+          <option value="">All Statuses</option>
+          <option value="Open">Open</option>
+          <option value="InProgress">In Progress</option>
+          <option value="Escalated">Escalated</option>
+          <option value="Closed">Closed</option>
+          <option value="FalsePositive">False Positive</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <select id="priorityFilter" class="form-select form-select-sm">
+          <option value="">All Priorities</option>
+          <option value="Critical">Critical</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <select id="severityFilter" class="form-select form-select-sm">
+          <option value="">All Severities</option>
+          <option value="Critical">Critical</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-3 d-flex gap-2">
+        <button class="btn btn-primary btn-sm flex-fill" id="btnFilter"><i class="bi bi-funnel"></i> Apply Filter</button>
+        <button class="btn btn-outline-secondary btn-sm" id="btnReset"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerts Table -->
+  <div class="efrs-panel">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Alert Number</th>
+            <th>Customer</th>
+            <th>Account</th>
+            <th>Type</th>
+            <th>Priority</th>
+            <th>Severity</th>
+            <th>Risk Score</th>
+            <th>Assigned Analyst</th>
+            <th>Status</th>
+            <th>Created Time</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="frmAlertsTableBody">
+          <tr><td colspan="11" class="text-muted text-center py-4"><span class="spinner-border spinner-border-sm me-2"></span>Loading FRM alerts...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="text-muted small" id="paginationInfo">Showing 0-0 of 0 alerts</div>
+      <nav>
+        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<!-- Assign Modal -->
+<div class="modal fade" id="assignModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-person-check-fill text-primary me-2"></i>Assign Alert to Analyst</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="assignAlertId">
+        <div class="mb-3">
+          <label class="form-label">Select Analyst ID / User ID</label>
+          <input type="number" id="analystIdInput" class="form-control" value="1" min="1" placeholder="Enter Analyst User ID (e.g. 1)">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnConfirmAssign">Assign Alert</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/frmalerts.js"></script>
+</body>
+</html>

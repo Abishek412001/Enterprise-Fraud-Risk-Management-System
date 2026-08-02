@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Partner Communication Portal · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="investigation.html"><i class="bi bi-search"></i> Investigation Workspace</a>
+  <a class="nav-link" href="wca.html"><i class="bi bi-clipboard-check-fill"></i> WCA Audit Log</a>
+  <a class="nav-link active" href="partnercommunications.html"><i class="bi bi-chat-left-dots-fill"></i> Partner Comms</a>
+  <a class="nav-link" href="templates.html"><i class="bi bi-file-text-fill"></i> Message Templates</a>
+  <a class="nav-link" href="cases.html"><i class="bi bi-briefcase-fill"></i> Cases</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="sentinelalerts.html"><i class="bi bi-cpu"></i> Sentinel SIEM</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Enterprise Partner Communication Portal</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <!-- Send Communication Form -->
+    <div class="col-lg-5">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-send text-primary me-2"></i>Dispatch Partner Message</h6>
+        <form id="partnerForm">
+          <div class="mb-2">
+            <label class="form-label small">Target Partner</label>
+            <select id="partnerSelect" class="form-select form-select-sm" required>
+              <option value="1">Visa Risk Operations</option>
+              <option value="2">Mastercard Fraud Net</option>
+              <option value="3">Law Enforcement Cyber Unit</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label class="form-label small">Channel</label>
+            <select id="channelSelect" class="form-select form-select-sm">
+              <option value="Email">Email</option>
+              <option value="Portal">Secure Portal</option>
+              <option value="Phone">Phone Log</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label class="form-label small">Subject</label>
+            <input type="text" id="subjectInput" class="form-control form-control-sm" placeholder="e.g. Urgent Fraud Information Request Case #1" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">Message</label>
+            <textarea id="messageInput" class="form-control form-control-sm" rows="4" placeholder="Enter message body..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm w-100"><i class="bi bi-send-fill"></i> Dispatch Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Partner Communications Log -->
+    <div class="col-lg-7">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-chat-dots text-success me-2"></i>Recent Partner Communications</h6>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th>Partner</th>
+                <th>Subject</th>
+                <th>Direction</th>
+                <th>Status</th>
+                <th>Sent Time</th>
+              </tr>
+            </thead>
+            <tbody id="commsTableBody">
+              <tr><td colspan="5" class="text-muted">Loading communications...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/partnercommunications.js"></script>
+</body>
+</html>

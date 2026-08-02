@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create New Fraud Case · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link active" href="cases.html"><i class="bi bi-briefcase-fill"></i> Case Management</a>
+  <a class="nav-link" href="sla-dashboard.html"><i class="bi bi-clock-history"></i> SLA Dashboard</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="sentinelalerts.html"><i class="bi bi-cpu"></i> Sentinel SIEM</a>
+  <a class="nav-link" href="securityevents.html"><i class="bi bi-journal-code"></i> Security Events</a>
+  <a class="nav-link" href="threatindicators.html"><i class="bi bi-bug-fill"></i> Threat Intel</a>
+  <a class="nav-link" href="devices.html"><i class="bi bi-laptop"></i> Devices</a>
+  <a class="nav-link" href="sessions.html"><i class="bi bi-activity"></i> Sessions</a>
+  <a class="nav-link" href="fraudalerts.html"><i class="bi bi-exclamation-triangle-fill"></i> Legacy Alerts</a>
+  <a class="nav-link" href="customers.html"><i class="bi bi-people-fill"></i> Customers</a>
+  <a class="nav-link" href="accounts.html"><i class="bi bi-wallet2"></i> Accounts</a>
+  <a class="nav-link" href="cards.html"><i class="bi bi-credit-card-2-front-fill"></i> Cards</a>
+  <a class="nav-link" href="transactions.html"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <div class="d-flex align-items-center gap-2">
+      <a href="cases.html" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i> Back to Cases</a>
+      <h5 class="mb-0">Create Enterprise Fraud Investigation Case</h5>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="efrs-panel" style="max-width: 800px; margin: 0 auto;">
+    <form id="createCaseForm">
+      <div class="mb-3">
+        <label for="customerSelect" class="form-label font-weight-bold">Target Customer</label>
+        <select id="customerSelect" class="form-select" required>
+          <option value="1">Customer ID 1 - John Doe</option>
+          <option value="2">Customer ID 2 - Jane Smith</option>
+        </select>
+      </div>
+
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label for="caseType" class="form-label">Case Type</label>
+          <select id="caseType" class="form-select" required>
+            <option value="FraudInvestigation">Fraud Investigation</option>
+            <option value="ATOInvestigation">Account Takeover (ATO)</option>
+            <option value="SIEMIncident">SIEM Incident Correlation</option>
+            <option value="Chargeback">Payment Chargeback</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="priority" class="form-label">Priority (SLA Target)</label>
+          <select id="priority" class="form-select" required>
+            <option value="Critical">Critical (2 Hours Target)</option>
+            <option value="High" selected>High (8 Hours Target)</option>
+            <option value="Medium">Medium (24 Hours Target)</option>
+            <option value="Low">Low (72 Hours Target)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="caseTitle" class="form-label">Case Title</label>
+        <input type="text" id="caseTitle" class="form-control" placeholder="e.g., Suspicious Mule Account Activity & Card Fraud" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="caseDescription" class="form-label">Case Description & Background Context</label>
+        <textarea id="caseDescription" class="form-control" rows="4" placeholder="Enter detailed investigation narrative, initial indicators, and transaction IDs..."></textarea>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <a href="cases.html" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Create Fraud Case</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/case-create.js"></script>
+</body>
+</html>

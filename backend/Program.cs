@@ -25,8 +25,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // ---------- DI: Repositories & Services ----------
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IFRMAlertRepository, FRMAlertRepository>();
+builder.Services.AddScoped<IATOAlertRepository, ATOAlertRepository>();
+builder.Services.AddScoped<ISentinelRepository, SentinelRepository>();
+builder.Services.AddScoped<ICaseRepository, CaseRepository>();
+builder.Services.AddScoped<IInvestigationRepository, InvestigationRepository>();
+builder.Services.AddScoped<IWcaRepository, WcaRepository>();
+builder.Services.AddScoped<IMetricsRepository, MetricsRepository>();
+builder.Services.AddScoped<ISecurityRepository, SecurityRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IFRMAlertService, FRMAlertService>();
+builder.Services.AddScoped<IATOAlertService, ATOAlertService>();
+builder.Services.AddScoped<ISentinelService, SentinelService>();
+builder.Services.AddScoped<ICaseService, CaseService>();
+builder.Services.AddScoped<IInvestigationService, InvestigationService>();
+builder.Services.AddScoped<IWcaService, WcaService>();
+builder.Services.AddScoped<IMetricsService, MetricsService>();
+builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<JwtTokenService>();
 
 // ---------- Auth ----------

@@ -1,57 +1,69 @@
-# 🛡️ Enterprise Fraud Risk Management System
+# Enterprise Fraud Risk Management System (EFRS)
 
-A full-stack fraud detection system: ASP.NET Core 8 + Entity Framework Core + Microsoft SQL Server backend, Bootstrap 5 frontend, with fraud detection implemented in SQL Server triggers.
+[![Build & Test](https://github.com/Abishek412001/Enterprise-Fraud-Risk-Management-System/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Abishek412001/Enterprise-Fraud-Risk-Management-System/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![.NET 8.0](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red.svg)](https://www.microsoft.com/sql-server/)
 
-## What's implemented right now (real, runnable code)
+An enterprise-grade, multi-tenant Fraud Risk Management (FRM), Account Takeover (ATO) Monitoring, and Microsoft Sentinel-inspired SIEM Alert Management Platform designed for Tier-1 banks, payment processors, and fintech platforms.
 
-**Database (`/database`) — complete**
-- `schema.sql` — all 10 tables (Users, Customers, Accounts, Cards, Merchants, Transactions, FraudAlerts, CustomerRiskScore, LoginHistory, AuditLog) with PKs, FKs, CHECK constraints, UNIQUE constraints
-- `indexes.sql` — performance indexes on hot columns
-- `functions.sql` — `fn_CustomerRiskScore`, `fn_TotalTransactions`, `fn_FailedLoginCount`, `fn_HighValueTransactionCount`
-- `procedures.sql` — all 10 stored procedures listed in the spec, including `usp_RecordTransaction`
-- `triggers.sql` — `trg_Transactions_FraudDetection` (velocity, high-value, duplicate, foreign, blacklisted-customer, blocked-card rules, all firing automatically on insert), plus audit triggers on Customers/Transactions/FraudAlerts
-- `views.sql`, `analytical_queries.sql` — dashboard and reporting queries
+---
 
-**Backend (`/backend`) — Auth + Customers modules complete end-to-end**
-- `Program.cs` — DI, JWT auth, Swagger, CORS, global exception middleware, Serilog logging, all wired up
-- `Data/ApplicationDbContext.cs` — EF Core mapping for all 10 entities
-- `Models/` — all 10 entity classes
-- Full vertical slice for **Auth** (register/login, BCrypt hashing, JWT issuance) and **Customers** (search + pagination, CRUD, role-based authorization) across Controller → Service → Repository → stored procedure/EF Core
+## 🌟 Architectural Overview
 
-**Frontend (`/frontend`) — Auth pages + dashboard shell complete**
-- `login.html` / `register.html` — working forms wired to the Auth API, validation, loading states
-- `dashboard.html` — Bootstrap sidebar/navbar, dark/light theme toggle, 4 stat cards, 4 Chart.js charts, recent-transactions and recent-alerts tables
-- `css/style.css`, `css/dashboard.css`, `js/login.js`, `js/register.js`, `js/dashboard.js`, `js/charts.js`
-
-## What's scaffolded but not yet built out
-
-The spec asks for 7 more full CRUD modules (Accounts, Cards, Merchants, Transactions, FraudAlerts, Reports with CSV/Excel/PDF export) and 6 more frontend pages (customers.html, accounts.html, cards.html, merchants.html, transactions.html, fraudalerts.html, reports.html). These weren't built in this pass — each one follows the exact same pattern as Customers (Controller → Service → Repository → stored procedure), so the fastest path is to say which module you want next and I'll build that vertical slice completely, the same way Customers was done, rather than generating seven half-finished modules at once.
-
-## Setup
-
-### 1. SQL Server
-Run the scripts in SQL Server Management Studio **in this order**:
-```
-schema.sql → indexes.sql → functions.sql → procedures.sql → triggers.sql → views.sql
+```mermaid
+graph TD
+    User[Fraud Analyst / Executive] --> FE[Frontend HTML5 / Bootstrap 5 / JS Dashboard]
+    FE --> API[ASP.NET Core 8 Web API / JWT Auth]
+    API --> DB[(Microsoft SQL Server 2022)]
+    API --> Rules[Dynamic Fraud Rules Engine]
+    API --> SIEM[Microsoft Sentinel SIEM Simulator]
+    API --> WCA[Work Case Actions & Partner Comms]
 ```
 
-### 2. Backend
+---
+
+## 🚀 Key Modules & Capabilities
+
+1. **FRM Alert Management**: Real-time rule triggers, severity assignment, and alert lifecycle tracking.
+2. **Account Takeover (ATO) Monitoring**: Device fingerprinting, impossible travel detection, brute force failed login analysis.
+3. **Microsoft Sentinel SIEM Integration**: Incident correlation, threat intelligence IP indicators, security event telemetry.
+4. **Enterprise Case Management & SLA Engine**: Case creation, priority-based SLA resolution timer tracking, escalation workflows.
+5. **Fraud Investigation Workspace & Customer 360**: High-privilege account freeze/unfreeze, card suspension, device blocking, evidence locker.
+6. **Work Case Actions (WCA) & Partner Comms**: Immutable audit trails and secure partner dispatching (Visa, Mastercard, Law Enforcement).
+7. **BI Fraud Metrics & Reporting**: Automated telemetry, Chart.js executive dashboards, PDF/CSV report exporter.
+8. **Enterprise RBAC & Security**: 9 fine-grained security roles, JWT token handling, security audit logs.
+
+---
+
+## 🛠️ Quick Start & Local Setup
+
+### Prerequisites
+- .NET 8.0 SDK
+- Microsoft SQL Server 2022 (or Express)
+- Docker Desktop (Optional)
+
 ```bash
-cd backend
-dotnet restore
-dotnet user-secrets set "Jwt:Key" "<generate-a-long-random-secret>"
-dotnet run
+# 1. Clone repository
+git clone https://github.com/Abishek412001/Enterprise-Fraud-Risk-Management-System.git
+cd Enterprise-Fraud-Risk-Management-System
+
+# 2. Run Database Script
+sqlcmd -S localhost\SQLEXPRESS -d EnterpriseFraudRiskDB -i database/schema.sql
+
+# 3. Start Backend Web API
+dotnet run --project backend/EnterpriseFraudRiskSystem.csproj
 ```
-Update `appsettings.json`'s `ConnectionStrings:DefaultConnection` for your SQL Server instance. Swagger UI is available at `/swagger` in development.
 
-### 3. Frontend
-Open `frontend/login.html` directly, or serve the folder with any static file server. Set `window.EFRS_API_BASE_URL` (in a `<script>` tag before `login.js`/`dashboard.js`) if your API isn't at `https://localhost:5001/api`.
+---
 
-## Security notes
-- Passwords are hashed with BCrypt (work factor 12), never stored or logged in plaintext.
-- Card numbers are stored masked (`CardNumberMasked`) plus a hash (`CardNumberHash`) — never the raw PAN.
-- All writes go through parameterized stored procedures or EF Core — no string-concatenated SQL.
-- JWT bearer auth with role-based authorization (`Admin`, `FraudAnalyst`) on every write endpoint.
+## 📄 Documentation Sitemap
 
-## Author
-Abishek W
+- [Architecture.md](docs/Architecture.md)
+- [API.md](docs/API.md)
+- [Database.md](docs/Database.md)
+- [Deployment.md](docs/Deployment.md)
+- [DeveloperGuide.md](docs/DeveloperGuide.md)
+- [AnalystGuide.md](docs/AnalystGuide.md)
+- [AdminGuide.md](docs/AdminGuide.md)
+- [SecurityGuide.md](docs/SecurityGuide.md)

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fraud Investigation Workspace · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link active" href="investigation.html"><i class="bi bi-search"></i> Investigation Workspace</a>
+  <a class="nav-link" href="customer360.html"><i class="bi bi-person-bounding-box"></i> Customer 360</a>
+  <a class="nav-link" href="analystworkspace.html"><i class="bi bi-person-workspace"></i> Analyst Action Center</a>
+  <a class="nav-link" href="wca.html"><i class="bi bi-clipboard-check-fill"></i> WCA Audit Log</a>
+  <a class="nav-link" href="partnercommunications.html"><i class="bi bi-chat-left-dots-fill"></i> Partner Comms</a>
+  <a class="nav-link" href="cases.html"><i class="bi bi-briefcase-fill"></i> Cases</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="sentinelalerts.html"><i class="bi bi-cpu"></i> Sentinel SIEM</a>
+  <a class="nav-link" href="securityevents.html"><i class="bi bi-journal-code"></i> Security Events</a>
+  <a class="nav-link" href="threatindicators.html"><i class="bi bi-bug-fill"></i> Threat Intel</a>
+  <a class="nav-link" href="devices.html"><i class="bi bi-laptop"></i> Devices</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+      <h5 class="mb-0">Primary Fraud Analyst Investigation Workspace</h5>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Action Toolbar -->
+  <div class="efrs-panel mb-3">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge fs-6 bg-danger" id="accountStatusBadge">Account Normal</span>
+        <span class="text-muted small">Target Customer ID: <strong id="targetCustId">1</strong></span>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-sm btn-outline-danger" id="btnFreeze"><i class="bi bi-snow"></i> Freeze Account</button>
+        <button class="btn btn-sm btn-outline-success" id="btnUnfreeze"><i class="bi bi-brightness-high-fill"></i> Unfreeze Account</button>
+        <button class="btn btn-sm btn-outline-warning text-dark" id="btnSuspendCard"><i class="bi bi-credit-card-2-front-fill"></i> Suspend Card</button>
+        <button class="btn btn-sm btn-outline-danger" id="btnBlockDevice"><i class="bi bi-laptop-fill"></i> Block Device</button>
+        <button class="btn btn-sm btn-primary" id="btnCreateCase"><i class="bi bi-briefcase-fill"></i> Create Case</button>
+        <button class="btn btn-sm btn-info text-white" id="btnPartnerContact"><i class="bi bi-chat-left-dots-fill"></i> Contact Partner</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer 360 Summary & Risk Breakdown -->
+  <div class="row g-3 mb-3">
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-person-badge text-primary me-2"></i>Customer 360 Telemetry</h6>
+        <div class="row g-2">
+          <div class="col-6"><strong>Name:</strong> <span id="custName">--</span></div>
+          <div class="col-6"><strong>Email:</strong> <span id="custEmail">--</span></div>
+          <div class="col-6"><strong>Phone:</strong> <span id="custPhone">--</span></div>
+          <div class="col-6"><strong>KYC / AML:</strong> <span id="custKyc">Verified</span> / <span id="custAml">Low</span></div>
+          <div class="col-6"><strong>Accounts:</strong> <span id="custAccounts">--</span></div>
+          <div class="col-6"><strong>Cards:</strong> <span id="custCards">--</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-speedometer2 text-danger me-2"></i>Multi-Layer Risk Scoring Breakdown</h6>
+        <div class="row g-2 text-center">
+          <div class="col-4">
+            <div class="p-2 border rounded">
+              <small class="text-muted d-block">ATO Risk</small>
+              <span class="fw-bold text-danger fs-5">75</span>/100
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-2 border rounded">
+              <small class="text-muted d-block">Transaction</small>
+              <span class="fw-bold text-warning fs-5">60</span>/100
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-2 border rounded">
+              <small class="text-muted d-block">Device Risk</small>
+              <span class="fw-bold text-danger fs-5">85</span>/100
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Investigation Findings & Notes -->
+  <div class="efrs-panel mb-3">
+    <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-journal-text text-success me-2"></i>Analyst Findings & Evidence Documentation</h6>
+    <textarea id="investigationNotes" class="form-control mb-2" rows="3" placeholder="Document reasoning, evidence findings, and partner contact details..."></textarea>
+    <button class="btn btn-sm btn-primary" id="btnSaveNotes"><i class="bi bi-check-lg"></i> Log Analyst Decision & WCA Interaction</button>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/investigation.js"></script>
+</body>
+</html>

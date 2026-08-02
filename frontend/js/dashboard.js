@@ -59,16 +59,33 @@ async function authFetch(path) {
     const customers = await authFetch("/customers?page=1&pageSize=1");
     if (customers) document.getElementById("statCustomers").textContent = customers.totalCount ?? "--";
 
-    // NOTE: /accounts, /transactions, /fraudalerts summary endpoints follow the
-    // same controller -> service -> repository pattern as CustomersController
-    // and are wired up the same way once those modules are added.
+    const frmStats = await authFetch("/frmalerts/summary-stats");
+    if (frmStats) {
+        document.getElementById("statAlerts").textContent = frmStats.openAlerts ?? "--";
+    }
+
     const recentTxBody = document.getElementById("recentTransactionsBody");
     const recentAlertsBody = document.getElementById("recentAlertsBody");
 
     if (recentTxBody) {
         recentTxBody.innerHTML = '<tr><td colspan="6" class="text-muted text-center">No data source connected yet</td></tr>';
     }
+
     if (recentAlertsBody) {
-        recentAlertsBody.innerHTML = '<tr><td colspan="6" class="text-muted text-center">No data source connected yet</td></tr>';
+        const recentAlertsData = await authFetch("/frmalerts?page=1&pageSize=5");
+        if (recentAlertsData && recentAlertsData.items && recentAlertsData.items.length > 0) {
+            recentAlertsBody.innerHTML = recentAlertsData.items.map(a => `
+                <tr>
+                  <td><a href="alertdetails.html?id=${a.alertID}" class="fw-bold text-decoration-none">${a.alertNumber}</a></td>
+                  <td><span class="badge bg-light text-dark border">${a.alertType}</span></td>
+                  <td><span class="badge ${a.severity === 'Critical' ? 'bg-danger' : a.severity === 'High' ? 'bg-warning text-dark' : 'bg-info text-dark'}">${a.severity}</span></td>
+                  <td>${a.customerName || 'N/A'}</td>
+                  <td><span class="badge ${a.status === 'Open' ? 'bg-primary' : a.status === 'Escalated' ? 'bg-danger' : 'bg-success'}">${a.status}</span></td>
+                  <td class="small text-muted">${new Date(a.createdDate).toLocaleTimeString()}</td>
+                </tr>
+            `).join("");
+        } else {
+            recentAlertsBody.innerHTML = '<tr><td colspan="6" class="text-muted text-center">No active FRM alerts found.</td></tr>';
+        }
     }
 })();

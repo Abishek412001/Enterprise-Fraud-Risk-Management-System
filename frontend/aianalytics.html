@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Fraud Analytics & Statistical Intelligence · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link active" href="aianalytics.html"><i class="bi bi-cpu-fill"></i> AI Analytics</a>
+  <a class="nav-link" href="rulesbuilder.html"><i class="bi bi-sliders"></i> Rules Engine</a>
+  <a class="nav-link" href="executivedashboard.html"><i class="bi bi-pie-chart-fill"></i> Executive C-Suite</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">AI Statistical Fraud Intelligence & Anomaly Engine</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-diagram-3 text-primary me-2"></i>Customer Behavioral Clustering</h6>
+        <div id="clustersContainer" class="d-flex flex-column gap-2">
+          <div class="text-muted">Loading behavioral clusters...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-lightning-charge text-danger me-2"></i>Statistical Outlier & Anomaly Detections</h6>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr><th>Entity</th><th>Anomaly Description</th><th>Confidence</th></tr>
+            </thead>
+            <tbody id="anomaliesBody">
+              <tr><td colspan="3" class="text-muted">Loading anomalies...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/aianalytics.js"></script>
+</body>
+</html>
