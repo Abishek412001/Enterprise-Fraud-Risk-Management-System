@@ -1,0 +1,73 @@
+:root {
+    --efrs-primary: #1c3faa;
+    --efrs-primary-dark: #142c78;
+    --efrs-accent: #16a37a;
+    --efrs-danger: #d64545;
+    --efrs-bg: #f4f6fb;
+    --efrs-card-bg: #ffffff;
+    --efrs-text: #1e2433;
+    --efrs-muted: #6b7280;
+}
+
+body {
+    background: var(--efrs-bg);
+    color: var(--efrs-text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.auth-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--efrs-primary) 0%, var(--efrs-primary-dark) 100%);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--efrs-card-bg);
+    border-radius: 14px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+.auth-card .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-card .brand i {
+    font-size: 1.8rem;
+    color: var(--efrs-primary);
+}
+
+.auth-card .brand span {
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.btn-efrs-primary {
+    background: var(--efrs-primary);
+    color: #fff;
+    border: none;
+}
+
+.btn-efrs-primary:hover {
+    background: var(--efrs-primary-dark);
+    color: #fff;
+}
+
+.form-error {
+    color: var(--efrs-danger);
+    font-size: 0.875rem;
+    min-height: 1.2rem;
+}
+
+.auth-footer-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}

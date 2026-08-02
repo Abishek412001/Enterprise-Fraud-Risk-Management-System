@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SLA Management Dashboard · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="cases.html"><i class="bi bi-briefcase-fill"></i> Case Management</a>
+  <a class="nav-link active" href="sla-dashboard.html"><i class="bi bi-clock-history"></i> SLA Dashboard</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="sentinelalerts.html"><i class="bi bi-cpu"></i> Sentinel SIEM</a>
+  <a class="nav-link" href="securityevents.html"><i class="bi bi-journal-code"></i> Security Events</a>
+  <a class="nav-link" href="threatindicators.html"><i class="bi bi-bug-fill"></i> Threat Intel</a>
+  <a class="nav-link" href="devices.html"><i class="bi bi-laptop"></i> Devices</a>
+  <a class="nav-link" href="sessions.html"><i class="bi bi-activity"></i> Sessions</a>
+  <a class="nav-link" href="fraudalerts.html"><i class="bi bi-exclamation-triangle-fill"></i> Legacy Alerts</a>
+  <a class="nav-link" href="customers.html"><i class="bi bi-people-fill"></i> Customers</a>
+  <a class="nav-link" href="accounts.html"><i class="bi bi-wallet2"></i> Accounts</a>
+  <a class="nav-link" href="cards.html"><i class="bi bi-credit-card-2-front-fill"></i> Cards</a>
+  <a class="nav-link" href="transactions.html"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Service Level Agreement (SLA) Performance Dashboard</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLA Target Guidelines -->
+  <div class="efrs-panel mb-3">
+    <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-shield-check text-primary me-2"></i>Enterprise SLA Resolution Targets</h6>
+    <div class="row text-center g-3">
+      <div class="col-6 col-md-3">
+        <div class="p-3 border rounded bg-light">
+          <span class="badge bg-danger mb-2">Critical Priority</span>
+          <h4 class="mb-0 text-danger">2 Hours</h4>
+          <small class="text-muted">Account Takeover / SIEM Threat</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="p-3 border rounded bg-light">
+          <span class="badge bg-warning text-dark mb-2">High Priority</span>
+          <h4 class="mb-0 text-warning">8 Hours</h4>
+          <small class="text-muted">Large Volume Transaction Fraud</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="p-3 border rounded bg-light">
+          <span class="badge bg-primary mb-2">Medium Priority</span>
+          <h4 class="mb-0 text-primary">24 Hours</h4>
+          <small class="text-muted">Suspicious Login / Velocity Anomaly</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="p-3 border rounded bg-light">
+          <span class="badge bg-secondary mb-2">Low Priority</span>
+          <h4 class="mb-0 text-secondary">72 Hours</h4>
+          <small class="text-muted">Compliance Inquiry / Review</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLA Breaches & Active Monitor -->
+  <div class="efrs-panel">
+    <h6 class="mb-3 border-bottom pb-2 text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>SLA Breaches & High Risk Cases Near Expiry</h6>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Case #</th>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Target Due Date</th>
+            <th>SLA Status</th>
+            <th>Assigned Analyst</th>
+          </tr>
+        </thead>
+        <tbody id="slaTableBody">
+          <tr><td colspan="7" class="text-muted text-center py-4">Loading SLA status...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/sla-dashboard.js"></script>
+</body>
+</html>

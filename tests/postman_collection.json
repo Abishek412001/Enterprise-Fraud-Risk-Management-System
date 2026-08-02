@@ -1,0 +1,48 @@
+{
+  "info": {
+    "name": "Enterprise Fraud Risk Management API Suite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin123!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "FRM Alerts - Get All",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/frmalerts",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "frmalerts"]
+        }
+      }
+    },
+    {
+      "name": "Executive Dashboard Telemetry",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/executive",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "executive"]
+        }
+      }
+    }
+  ]
+}

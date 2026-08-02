@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Enterprise Reporting & Export Engine · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="executivedashboard.html"><i class="bi bi-pie-chart-fill"></i> Executive C-Suite</a>
+  <a class="nav-link" href="metrics.html"><i class="bi bi-bar-chart-line-fill"></i> Fraud Metrics & BI</a>
+  <a class="nav-link active" href="reports.html"><i class="bi bi-file-earmark-text-fill"></i> Export Engine</a>
+  <a class="nav-link" href="trendanalysis.html"><i class="bi bi-graph-up-arrow"></i> Trend Analytics</a>
+  <a class="nav-link" href="analystperformance.html"><i class="bi bi-award-fill"></i> Analyst Performance</a>
+  <a class="nav-link" href="users.html"><i class="bi bi-people-fill"></i> User RBAC</a>
+  <a class="nav-link" href="auditlogs.html"><i class="bi bi-journal-check"></i> Audit Logs</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Enterprise Reporting & Data Export Hub</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="efrs-panel mb-3">
+    <h6 class="mb-3 border-bottom pb-2">Generate & Export BI Reports</h6>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="p-3 border rounded h-100 bg-light">
+          <h6>Executive Fraud Summary</h6>
+          <p class="small text-muted mb-3">High-level KPIs, total fraud prevented, SLA status, and risk metrics.</p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" id="btnExportCsvExec"><i class="bi bi-filetype-csv"></i> Export CSV</button>
+            <button class="btn btn-sm btn-outline-danger" id="btnExportPdfExec"><i class="bi bi-file-pdf"></i> Export PDF</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 border rounded h-100 bg-light">
+          <h6>Analyst Operations & Productivity</h6>
+          <p class="small text-muted mb-3">Workload distribution, case resolution speed, and SLA compliance per analyst.</p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" id="btnExportCsvOps"><i class="bi bi-filetype-csv"></i> Export CSV</button>
+            <button class="btn btn-sm btn-outline-danger" id="btnExportPdfOps"><i class="bi bi-file-pdf"></i> Export PDF</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 border rounded h-100 bg-light">
+          <h6>Audit & Compliance Trail</h6>
+          <p class="small text-muted mb-3">Regulatory compliance logs, user actions, and system security history.</p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" id="btnExportCsvAudit"><i class="bi bi-filetype-csv"></i> Export CSV</button>
+            <button class="btn btn-sm btn-outline-danger" id="btnExportPdfAudit"><i class="bi bi-file-pdf"></i> Export PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/reports.js"></script>
+</body>
+</html>

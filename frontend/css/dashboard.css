@@ -1,0 +1,128 @@
+:root {
+    --sidebar-width: 260px;
+    --efrs-primary: #1c3faa;
+    --efrs-accent: #16a37a;
+    --efrs-danger: #d64545;
+    --efrs-warning: #e6a23c;
+}
+
+[data-theme="light"] {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --text: #1e2433;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+    --bg: #0f1420;
+    --surface: #171d2b;
+    --text: #eef1f8;
+    --muted: #9aa4b8;
+    --border: #262e42;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.efrs-sidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1.25rem 1rem;
+}
+
+.efrs-sidebar .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    margin-bottom: 1.75rem;
+    color: var(--efrs-primary);
+}
+
+.efrs-sidebar .nav-link {
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.efrs-sidebar .nav-link.active,
+.efrs-sidebar .nav-link:hover {
+    background: rgba(28, 63, 170, 0.1);
+    color: var(--efrs-primary);
+}
+
+.efrs-main {
+    margin-left: var(--sidebar-width);
+    padding: 1.5rem 2rem;
+}
+
+.efrs-navbar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.efrs-stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    height: 100%;
+}
+
+.efrs-stat-card .stat-value {
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+.efrs-stat-card .stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.efrs-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.table {
+    color: var(--text);
+}
+
+.badge-severity-Critical { background: #7c1d1d; }
+.badge-severity-High { background: var(--efrs-danger); }
+.badge-severity-Medium { background: var(--efrs-warning); }
+.badge-severity-Low { background: var(--efrs-accent); }
+
+@media (max-width: 992px) {
+    .efrs-sidebar { transform: translateX(-100%); transition: transform 0.2s ease; z-index: 1050; }
+    .efrs-sidebar.open { transform: translateX(0); }
+    .efrs-main { margin-left: 0; }
+}

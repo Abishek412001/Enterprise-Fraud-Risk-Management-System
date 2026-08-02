@@ -1,0 +1,38 @@
+name: EFRS Enterprise CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "release/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore backend/EnterpriseFraudRiskSystem.csproj
+
+    - name: Build Solution
+      run: dotnet build backend/EnterpriseFraudRiskSystem.csproj --configuration Release --no-restore
+
+    - name: Run Unit & Integration Tests
+      run: dotnet test backend/EnterpriseFraudRiskSystem.csproj --no-build --verbosity normal
+
+  docker-build:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: docker build -t efrs-backend:latest .

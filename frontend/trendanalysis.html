@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trend Analysis · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="executivedashboard.html"><i class="bi bi-pie-chart-fill"></i> Executive C-Suite</a>
+  <a class="nav-link" href="metrics.html"><i class="bi bi-bar-chart-line-fill"></i> Fraud Metrics & BI</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-text-fill"></i> Export Engine</a>
+  <a class="nav-link active" href="trendanalysis.html"><i class="bi bi-graph-up-arrow"></i> Trend Analytics</a>
+  <a class="nav-link" href="analystperformance.html"><i class="bi bi-award-fill"></i> Analyst Performance</a>
+  <a class="nav-link" href="users.html"><i class="bi bi-people-fill"></i> User RBAC</a>
+  <a class="nav-link" href="auditlogs.html"><i class="bi bi-journal-check"></i> Audit Logs</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Emerging Fraud Trend Detection</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="efrs-panel">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Trend Pattern</th>
+            <th>Category</th>
+            <th>Risk Level</th>
+            <th>Growth %</th>
+            <th>Top Indicator</th>
+            <th>Detected Date</th>
+          </tr>
+        </thead>
+        <tbody id="trendsTableBody">
+          <tr><td colspan="6" class="text-muted text-center py-4">Loading fraud trends...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/trendanalysis.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: efrs-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=EnterprisePassword123!
+    ports:
+      - "1433:1433"
+    networks:
+      - efrs-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: efrs-backend
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=efrs-sqlserver;Database=EnterpriseFraudRiskDB;User Id=sa;Password=EnterprisePassword123!;TrustServerCertificate=True;
+    depends_on:
+      - database
+    networks:
+      - efrs-network
+
+  reverse-proxy:
+    image: nginx:alpine
+    container_name: efrs-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - efrs-network
+
+networks:
+  efrs-network:
+    driver: bridge

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Customer 360 View · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="investigation.html"><i class="bi bi-search"></i> Investigation Workspace</a>
+  <a class="nav-link active" href="customer360.html"><i class="bi bi-person-bounding-box"></i> Customer 360</a>
+  <a class="nav-link" href="analystworkspace.html"><i class="bi bi-person-workspace"></i> Analyst Action Center</a>
+  <a class="nav-link" href="wca.html"><i class="bi bi-clipboard-check-fill"></i> WCA Audit Log</a>
+  <a class="nav-link" href="partnercommunications.html"><i class="bi bi-chat-left-dots-fill"></i> Partner Comms</a>
+  <a class="nav-link" href="cases.html"><i class="bi bi-briefcase-fill"></i> Cases</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="sentinelalerts.html"><i class="bi bi-cpu"></i> Sentinel SIEM</a>
+  <a class="nav-link" href="securityevents.html"><i class="bi bi-journal-code"></i> Security Events</a>
+  <a class="nav-link" href="threatindicators.html"><i class="bi bi-bug-fill"></i> Threat Intel</a>
+  <a class="nav-link" href="devices.html"><i class="bi bi-laptop"></i> Devices</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <h5 class="mb-0">Customer 360 Deep Profile</h5>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="efrs-panel mb-3">
+    <div class="row g-2 align-items-center">
+      <div class="col-md-4">
+        <select id="custSelect" class="form-select form-select-sm">
+          <option value="1">Customer ID 1 - John Doe</option>
+          <option value="2">Customer ID 2 - Jane Smith</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-3">
+        <button class="btn btn-primary btn-sm w-100" id="btnLoad360"><i class="bi bi-search"></i> Load Customer 360</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="efrs-panel">
+    <h6 class="mb-3 border-bottom pb-2">360° Consolidated Summary</h6>
+    <div id="c360Content" class="row g-3">
+      <div class="text-muted">Loading Customer 360 profile...</div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/customer360.js"></script>
+</body>
+</html>

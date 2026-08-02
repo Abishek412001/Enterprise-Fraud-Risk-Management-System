@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ATO Investigation Workspace · Enterprise Fraud Risk System</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+
+<nav class="efrs-sidebar" id="sidebar">
+  <div class="brand"><i class="bi bi-shield-lock-fill"></i> EFRS</div>
+  <a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+  <a class="nav-link" href="frmalerts.html"><i class="bi bi-shield-exclamation"></i> FRM Alerts</a>
+  <a class="nav-link active" href="atoalerts.html"><i class="bi bi-person-bounding-box"></i> ATO Alerts</a>
+  <a class="nav-link" href="devices.html"><i class="bi bi-laptop"></i> Devices</a>
+  <a class="nav-link" href="sessions.html"><i class="bi bi-activity"></i> Sessions</a>
+  <a class="nav-link" href="fraudalerts.html"><i class="bi bi-exclamation-triangle-fill"></i> Legacy Alerts</a>
+  <a class="nav-link" href="customers.html"><i class="bi bi-people-fill"></i> Customers</a>
+  <a class="nav-link" href="accounts.html"><i class="bi bi-wallet2"></i> Accounts</a>
+  <a class="nav-link" href="cards.html"><i class="bi bi-credit-card-2-front-fill"></i> Cards</a>
+  <a class="nav-link" href="transactions.html"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+  <a class="nav-link" href="reports.html"><i class="bi bi-file-earmark-bar-graph-fill"></i> Reports</a>
+  <hr>
+  <a class="nav-link" href="#" id="logoutLink"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</nav>
+
+<main class="efrs-main">
+  <div class="efrs-navbar">
+    <div class="d-flex align-items-center gap-2">
+      <a href="atoalerts.html" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i> Back to Queue</a>
+      <h5 class="mb-0">ATO Investigation: <span id="atoNumberHeader">ATO-00000000-0000</span></h5>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="themeToggle"><i class="bi bi-moon-fill"></i></button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i> <span id="navUsername">User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Bar -->
+  <div class="efrs-panel mb-3">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge fs-6 bg-danger" id="atoStatusBadge">Open</span>
+        <span class="badge fs-6 bg-warning text-dark" id="atoPriorityBadge">High Priority</span>
+        <span class="text-muted small">ATO Risk Score: <strong id="atoRiskScoreText" class="text-danger">75</strong>/100</span>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-sm btn-outline-primary" id="btnActionAssign"><i class="bi bi-person-check-fill"></i> Assign</button>
+        <button class="btn btn-sm btn-outline-danger" id="btnActionBlockDevice"><i class="bi bi-laptop-fill"></i> Block Device</button>
+        <button class="btn btn-sm btn-outline-success" id="btnActionTrustDevice"><i class="bi bi-check-circle"></i> Trust Device</button>
+        <button class="btn btn-sm btn-outline-danger" id="btnActionFreeze"><i class="bi bi-snow"></i> Freeze Account</button>
+        <button class="btn btn-sm btn-success" id="btnActionClose"><i class="bi bi-check-circle-fill"></i> Resolve ATO Alert</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <!-- Customer & Active Session Info -->
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-person-badge text-primary me-2"></i>Customer Account Info</h6>
+        <div class="row g-2">
+          <div class="col-6"><strong>Name:</strong> <span id="custName">--</span></div>
+          <div class="col-6"><strong>Email:</strong> <span id="custEmail">--</span></div>
+          <div class="col-6"><strong>Phone:</strong> <span id="custPhone">--</span></div>
+          <div class="col-6"><strong>Assigned Analyst:</strong> <span id="assignedAnalyst">Unassigned</span></div>
+        </div>
+
+        <h6 class="mt-4 mb-3 border-bottom pb-2"><i class="bi bi-globe text-danger me-2"></i>Session & IP Telemetry</h6>
+        <div class="row g-2">
+          <div class="col-6"><strong>IP Address:</strong> <code id="sessIp">--</code></div>
+          <div class="col-6"><strong>Country:</strong> <span id="sessCountry">--</span></div>
+          <div class="col-6"><strong>Browser:</strong> <span id="sessBrowser">--</span></div>
+          <div class="col-6"><strong>OS:</strong> <span id="sessOs">--</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATO Risk Scoring Engine Breakdown -->
+    <div class="col-lg-6">
+      <div class="efrs-panel h-100">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-speedometer2 text-danger me-2"></i>ATO Risk Engine Scoring Rules</h6>
+        <ul class="list-group list-group-flush small">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Unrecognized New Device Fingerprint
+            <span class="badge bg-danger">+20 Risk</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Impossible Travel Velocity (Across Geolocations)
+            <span class="badge bg-danger">+40 Risk</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            TOR / Anonymous VPN Network Detection
+            <span class="badge bg-danger">+50 Risk</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            5+ Failed Password Attempts in 24h
+            <span class="badge bg-warning text-dark">+30 Risk</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Device Fingerprint History & Session Logs -->
+  <div class="row g-3 mb-3">
+    <div class="col-lg-6">
+      <div class="efrs-panel">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-laptop text-info me-2"></i>Known Customer Devices</h6>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead><tr><th>Fingerprint</th><th>Browser</th><th>Country</th><th>Status</th></tr></thead>
+            <tbody id="devicesTableBody"><tr><td colspan="4" class="text-muted">Loading devices...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="efrs-panel">
+        <h6 class="mb-3 border-bottom pb-2"><i class="bi bi-activity text-success me-2"></i>Recent Login Sessions</h6>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead><tr><th>Time</th><th>IP</th><th>Country</th><th>Status</th><th>Risk</th></tr></thead>
+            <tbody id="sessionsTableBody"><tr><td colspan="5" class="text-muted">Loading sessions...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/atodetails.js"></script>
+</body>
+</html>
